@@ -18,7 +18,7 @@ import com.docmarker.encryption.Encoders;
 
 @Configuration
 @EnableWebSecurity
-//@Order(SecurityProperties.BASIC_AUTH_ORDER)
+@Order(SecurityProperties.BASIC_AUTH_ORDER)
 @Import(Encoders.class)
 public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
