@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
 	@Query("SELECT DISTINCT user FROM User user " +
             "INNER JOIN FETCH user.authorities AS authorities " +
             "WHERE user.username = :username")
