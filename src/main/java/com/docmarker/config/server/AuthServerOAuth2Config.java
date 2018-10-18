@@ -1,4 +1,4 @@
-package com.docmarker.config.security;
+package com.docmarker.config.server;
 
 import javax.sql.DataSource;
 

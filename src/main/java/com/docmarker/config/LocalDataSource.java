@@ -1,6 +1,5 @@
-package com.docmarker.config.context;
+package com.docmarker.config;
 
-import static com.docmarker.utility.AppConstants.REPO_PACKAGES_TO_SCAN;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -22,7 +21,7 @@ import com.docmarker.model.Address;
 //@PropertySource("classpath:/application.properties")
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = REPO_PACKAGES_TO_SCAN)
+@EnableJpaRepositories(basePackages = "com.docmarker.*")
 public class LocalDataSource {
 
 	@Bean(name = "dataSource")

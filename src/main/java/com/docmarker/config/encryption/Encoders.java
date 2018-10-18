@@ -1,4 +1,4 @@
-package com.docmarker.encryption;
+package com.docmarker.config.encryption;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
