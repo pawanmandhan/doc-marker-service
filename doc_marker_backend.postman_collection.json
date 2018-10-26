@@ -1,0 +1,110 @@
+{
+	"variables": [],
+	"info": {
+		"name": "doc_marker_backend",
+		"_postman_id": "7dea838f-1fc8-40e0-0ca0-c00aa23f8385",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TOKEN READ-WRITE",
+			"request": {
+				"url": "http://localhost:8080/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLXdyaXRlLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtd3JpdGUtY2xpZW50LXBhc3N3b3JkMTIzNA==",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin1234",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "spring-security-oauth2-read-write-client",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Generated from a curl request: \ncurl -X POST \\\n  http://localhost:8080/oauth/token \\\n  -H 'authorization: Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLXdyaXRlLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtd3JpdGUtY2xpZW50LXBhc3N3b3JkMTIzNA==' \\\n  -F grant_type=password \\\n  -F username=admin \\\n  -F password=admin1234 \\\n  -F client_id=spring-security-oauth2-read-write-client"
+			},
+			"response": []
+		},
+		{
+			"name": "company",
+			"request": {
+				"url": "http://localhost:8080/secured/company/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer 5a01ced6-dbbd-4d0d-a5b0-8ea4962121a9",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Generated from a curl request: \ncurl -X GET \\\n  http://localhost:8080/secured/company/ \\\n  -H 'authorization: Bearer e6631caa-bcf9-433c-8e54-3511fa55816d'"
+			},
+			"response": []
+		},
+		{
+			"name": "TOKEN READ",
+			"request": {
+				"url": "http://localhost:8080/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtY2xpZW50LXBhc3N3b3JkMTIzNA==",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin1234",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "spring-security-oauth2-read-client",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Generated from a curl request: \ncurl -X POST \\\n  http://localhost:8080/oauth/token \\\n  -H 'authorization: Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtY2xpZW50LXBhc3N3b3JkMTIzNA==' \\\n  -F grant_type=password \\\n  -F username=admin \\\n  -F password=admin1234 \\\n  -F client_id=spring-security-oauth2-read-client"
+			},
+			"response": []
+		}
+	]
+}
