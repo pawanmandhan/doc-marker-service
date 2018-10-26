@@ -105,6 +105,69 @@
 				"description": "Generated from a curl request: \ncurl -X POST \\\n  http://localhost:8080/oauth/token \\\n  -H 'authorization: Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtY2xpZW50LXBhc3N3b3JkMTIzNA==' \\\n  -F grant_type=password \\\n  -F username=admin \\\n  -F password=admin1234 \\\n  -F client_id=spring-security-oauth2-read-client"
 			},
 			"response": []
+		},
+		{
+			"name": "filter company",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/secured/company/filter?name=pepsi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"secured",
+						"company",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "pepsi",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5a01ced6-dbbd-4d0d-a5b0-8ea4962121a9",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "create company",
+			"request": {
+				"url": "http://localhost:8080/secured/company",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5a01ced6-dbbd-4d0d-a5b0-8ea4962121a9",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Sopra\",\n\t\"departments\": [{\"id\":1}],\n\t\"cars\":[{\"id\":1}]\n}"
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
