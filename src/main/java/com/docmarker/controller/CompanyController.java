@@ -31,7 +31,7 @@ public class CompanyController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody List<Company> getAll() {
+	public List<Company> getAll() {
 		return companyService.getAll();
 	}
 
