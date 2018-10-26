@@ -1,23 +1,13 @@
 package com.docmarker.repository;
 
-
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.docmarker.model.Company;
 
-public interface CompanyRepository {
+@Repository
+public interface CompanyRepository extends JpaRepository<Company, Long> {
 
-    Company find(Long id);
+	public Company findByName(String name);
 
-    Company find(String name);
-
-    List<Company> findAll();
-
-    void create(Company company);
-
-    Company update(Company company);
-
-    void delete(Long id);
-
-    void delete(Company company);
 }
