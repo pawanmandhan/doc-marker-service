@@ -1,0 +1,3 @@
+## mysqldump -u username -p databasename > filename.sql
+
+   mysqldump -u root -p doc_marker_db > doc_marker_db.sql
