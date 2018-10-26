@@ -12,11 +12,13 @@ import com.docmarker.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
+    
+	@Autowired
     private UserRepository userRepository;
+    
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
         if (user != null) {
             return user;
