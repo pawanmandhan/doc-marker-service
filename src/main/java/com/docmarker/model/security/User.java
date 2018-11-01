@@ -38,10 +38,20 @@ public class User implements UserDetails, Serializable {
 
 	@Column(name = "USER_NAME")
 	private String username;
-
+	
+	@JsonIgnore
 	@Column(name = "PASSWORD")
 	private String password;
 
+	@Column(name = "FIRSTNAME")
+	private String firstName;
+
+	@Column(name = "LASTNAME")
+	private String lastName;
+	
+	@Column(name = "EMAIL")
+	private String email;
+	
 	@Column(name = "ACCOUNT_EXPIRED")
 	private boolean accountExpired;
 
@@ -60,6 +70,15 @@ public class User implements UserDetails, Serializable {
 	@JsonIgnore
 	private Collection<Authority> authorities;
 
+	@JsonIgnore
+	@Column(name = "ACTIVATION_KEY", length = 20)
+	private String activationKey;
+	
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		return !isAccountExpired();
@@ -74,4 +93,5 @@ public class User implements UserDetails, Serializable {
 	public boolean isCredentialsNonExpired() {
 		return !isCredentialsExpired();
 	}
+
 }
