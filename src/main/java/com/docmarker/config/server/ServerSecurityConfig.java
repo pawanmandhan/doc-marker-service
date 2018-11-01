@@ -35,8 +35,4 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(userPasswordEncoder);
     }
     
-//    @Bean
-//    public UserDetailsService createUserDetailsService() {
-//        return new UserDetailsServiceImpl();
-//    }
 }
