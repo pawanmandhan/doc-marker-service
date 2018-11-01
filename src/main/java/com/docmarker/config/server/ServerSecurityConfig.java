@@ -1,4 +1,4 @@
-package com.docmarker.config.security;
+package com.docmarker.config.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -13,12 +13,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.docmarker.encryption.Encoders;
+import com.docmarker.config.encryption.Encoders;
 
 
 @Configuration
 @EnableWebSecurity
-@Order(SecurityProperties.BASIC_AUTH_ORDER)
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @Import(Encoders.class)
 public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -34,4 +34,9 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(userPasswordEncoder);
     }
+    
+//    @Bean
+//    public UserDetailsService createUserDetailsService() {
+//        return new UserDetailsServiceImpl();
+//    }
 }
