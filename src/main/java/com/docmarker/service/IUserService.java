@@ -6,4 +6,5 @@ import com.docmarker.model.security.User;
 
 public interface IUserService {
     User registerUser(UserDto accountDto) throws EmailAlreadyUsedException;
+    void createVerificationToken(User user, String token);
 }

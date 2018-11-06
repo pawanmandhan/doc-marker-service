@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 import com.docmarker.dto.UserDto;
 import com.docmarker.exception.EmailAlreadyUsedException;
 import com.docmarker.exception.LoginAlreadyUsedException;
+import com.docmarker.model.VerificationToken;
 import com.docmarker.model.security.Authority;
 import com.docmarker.model.security.User;
 import com.docmarker.repository.AuthorityRepository;
 import com.docmarker.repository.UserRepository;
+import com.docmarker.repository.VerificationTokenRepository;
 import com.docmarker.service.util.AuthoritiesConstants;
 import com.docmarker.service.util.RandomUtil;
 
@@ -32,6 +34,8 @@ public class UserService implements IUserService {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private AuthorityRepository authorityRepository;
+	@Autowired
+	private VerificationTokenRepository tokenRepository;
 
 	@Transactional
 	@Override
@@ -84,5 +88,11 @@ public class UserService implements IUserService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void createVerificationToken(final User user, final String token) {
+		final VerificationToken myToken = new VerificationToken(token, user);
+		tokenRepository.save(myToken);
 	}
 }
