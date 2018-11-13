@@ -95,4 +95,14 @@ public class UserService implements IUserService {
 		final VerificationToken myToken = new VerificationToken(token, user);
 		tokenRepository.save(myToken);
 	}
+
+	@Override
+	public VerificationToken getVerificationToken(final String verificationToken) {
+		return tokenRepository.findByToken(verificationToken);
+	}
+	
+	  @Override
+	    public void saveRegisteredUser(final User user) {
+	        userRepository.save(user);
+	    }
 }
