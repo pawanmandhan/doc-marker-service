@@ -12,25 +12,25 @@ import com.docmarker.dto.UserDto;
 import com.docmarker.model.security.User;
 import com.docmarker.service.IUserService;
 
-@RestController
-@RequestMapping("/secured")
+
+
 public class UserController {
 	
-	@Autowired
-	private IUserService service;
-
-	@PostMapping(value = "/register")
-	public User registerUserAccount(@RequestBody @Valid UserDto accountDto) {
-		
-		return createUserAccount(accountDto);
-	}
-	
-	private User createUserAccount(UserDto accountDto) {
-	    User registered = null;
-	    
-	     registered = service.registerUser(accountDto);
-	        
-	    return registered;
-	}
+//	@Autowired
+//	private IUserService service;
+//
+//	@PostMapping(value = "/register")
+//	public User registerUserAccount(@RequestBody @Valid UserDto accountDto) {
+//		
+//		return createUserAccount(accountDto);
+//	}
+//	
+//	private User createUserAccount(UserDto accountDto) {
+//	    User registered = null;
+//	    
+//	     registered = service.registerUser(accountDto);
+//	        
+//	    return registered;
+//	}
 
 }
