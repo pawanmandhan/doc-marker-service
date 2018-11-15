@@ -1,6 +1,7 @@
 package com.docmarker.controller;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -9,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +34,10 @@ public class RegistrationController {
 
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	private JavaMailSender mailSender;
+	@Autowired
+	private Environment env;
 
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;
@@ -66,6 +74,31 @@ public class RegistrationController {
 		user.setEnabled(true);
 		userService.saveRegisteredUser(user);
 		return "Token added succesfully";
+	}
+
+	@RequestMapping(value = "/user/resendRegistrationToken", method = RequestMethod.GET)
+	public GenericResponse resendRegistrationToken(final HttpServletRequest request,
+			@RequestParam("token") final String existingToken) {
+		final VerificationToken newToken = userService.generateNewVerificationToken(existingToken);
+		final User user = userService.getUser(newToken.getToken());
+		mailSender.send(constructResendVerificationTokenEmail(getAppUrl(request), request.getLocale(), newToken, user));
+		return new GenericResponse("Resend Token Generated.");
+	}
+
+	private SimpleMailMessage constructResendVerificationTokenEmail(final String contextPath, final Locale locale,
+			final VerificationToken newToken, final User user) {
+		final String confirmationUrl = contextPath + "/registrationConfirm.html?token=" + newToken.getToken();
+		final String message ="Resend Token Generated.";
+		return constructEmail("Resend Registration Token", message + " \r\n" + confirmationUrl, user);
+	}
+
+	private SimpleMailMessage constructEmail(String subject, String body, User user) {
+		final SimpleMailMessage email = new SimpleMailMessage();
+		email.setSubject(subject);
+		email.setText(body);
+		email.setTo(user.getEmail());
+		email.setFrom(env.getProperty("support.email"));
+		return email;
 	}
 
 }
