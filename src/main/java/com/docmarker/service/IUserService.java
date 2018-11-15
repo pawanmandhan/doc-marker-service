@@ -10,4 +10,6 @@ public interface IUserService {
     void createVerificationToken(User user, String token);
     VerificationToken getVerificationToken(String verificationToken);
     void saveRegisteredUser(User user);
+    VerificationToken generateNewVerificationToken(String token);
+    User getUser(String verificationToken);
 }

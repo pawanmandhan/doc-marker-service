@@ -2,6 +2,7 @@ package com.docmarker.service;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -100,9 +101,26 @@ public class UserService implements IUserService {
 	public VerificationToken getVerificationToken(final String verificationToken) {
 		return tokenRepository.findByToken(verificationToken);
 	}
-	
-	  @Override
-	    public void saveRegisteredUser(final User user) {
-	        userRepository.save(user);
-	    }
+
+	@Override
+	public void saveRegisteredUser(final User user) {
+		userRepository.save(user);
+	}
+
+	@Override
+	public VerificationToken generateNewVerificationToken(final String existingVerificationToken) {
+		VerificationToken vToken = tokenRepository.findByToken(existingVerificationToken);
+		vToken.updateToken(UUID.randomUUID().toString());
+		vToken = tokenRepository.save(vToken);
+		return vToken;
+	}
+
+	@Override
+	public User getUser(final String verificationToken) {
+		final VerificationToken token = tokenRepository.findByToken(verificationToken);
+		if (token != null) {
+			return token.getUser();
+		}
+		return null;
+	}
 }
