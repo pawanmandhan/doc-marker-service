@@ -25,38 +25,42 @@
 						{
 							"key": "grant_type",
 							"value": "password",
-							"type": "text"
+							"type": "text",
+							"description": ""
 						},
 						{
 							"key": "username",
 							"value": "admin",
-							"type": "text"
+							"type": "text",
+							"description": ""
 						},
 						{
 							"key": "password",
 							"value": "admin1234",
-							"type": "text"
+							"type": "text",
+							"description": ""
 						},
 						{
 							"key": "client_id",
 							"value": "spring-security-oauth2-read-write-client",
-							"type": "text"
+							"type": "text",
+							"description": ""
 						}
 					]
 				},
-				"description": "Generated from a curl request: \ncurl -X POST \\\n  http://localhost:8080/oauth/token \\\n  -H 'authorization: Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLXdyaXRlLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtd3JpdGUtY2xpZW50LXBhc3N3b3JkMTIzNA==' \\\n  -F grant_type=password \\\n  -F username=admin \\\n  -F password=admin1234 \\\n  -F client_id=spring-security-oauth2-read-write-client"
+				"description": null
 			},
 			"response": []
 		},
 		{
 			"name": "company",
 			"request": {
-				"url": "http://localhost:8080/secured/company/",
+				"url": "http://localhost:8080/secured/company",
 				"method": "GET",
 				"header": [
 					{
-						"key": "authorization",
-						"value": "Bearer 5a01ced6-dbbd-4d0d-a5b0-8ea4962121a9",
+						"key": "Authorization",
+						"value": "Bearer dccb9ae9-7ba2-452a-a76a-785581303e01",
 						"description": ""
 					}
 				],
@@ -125,8 +129,7 @@
 						{
 							"key": "name",
 							"value": "pepsi",
-							"equals": true,
-							"description": ""
+							"equals": true
 						}
 					],
 					"variable": []
@@ -135,12 +138,11 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer 5a01ced6-dbbd-4d0d-a5b0-8ea4962121a9",
-						"description": ""
+						"value": "Bearer 5a01ced6-dbbd-4d0d-a5b0-8ea4962121a9"
 					}
 				],
 				"body": {},
-				"description": ""
+				"description": null
 			},
 			"response": []
 		},
@@ -152,7 +154,30 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer 5a01ced6-dbbd-4d0d-a5b0-8ea4962121a9",
+						"value": "Bearer 5a01ced6-dbbd-4d0d-a5b0-8ea4962121a9"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Sopra\",\n  \"departments\": [{\"id\":1}],\n  \"cars\":[{\"id\":1}]\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "save password",
+			"request": {
+				"url": "http://localhost:8080/user/savePassword",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 38ad1456-2207-42f2-b076-4b34f69a8d0f",
 						"description": ""
 					},
 					{
@@ -163,8 +188,59 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Sopra\",\n\t\"departments\": [{\"id\":1}],\n\t\"cars\":[{\"id\":1}]\n}"
+					"raw": "{\n\t\"oldPassword\":\"1234\",\n\t\"newPassword\":\"2345\"\n\t\n}"
 				},
+				"description": "changes user password"
+			},
+			"response": []
+		},
+		{
+			"name": "user registration",
+			"request": {
+				"url": "http://localhost:8080/user/registration",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n\t\r\n\"firstName\":\"pawan\",\r\n\"lastName\":\"mandhan\",\r\n\"password\":\"1234\",\r\n\"matchingPassword\":\"1234\",\r\n\"email\":\"mandhanpawan7@gmail.com\"\r\n} "
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "user registration confirmation",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/user/registrationConfirm?token=2270388c-a03a-4c45-a41f-c93b15982f95",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"registrationConfirm"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "2270388c-a03a-4c45-a41f-c93b15982f95",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
 				"description": ""
 			},
 			"response": []
