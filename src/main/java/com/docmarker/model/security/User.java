@@ -1,9 +1,5 @@
 package com.docmarker.model.security;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -16,20 +12,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "USER_", uniqueConstraints = { @UniqueConstraint(columnNames = { "USER_NAME" }) })
+@Table(name = "USER", uniqueConstraints = { @UniqueConstraint(columnNames = { "USER_NAME" }) })
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails, Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,15 +66,10 @@ public class User implements UserDetails, Serializable {
 	private boolean enabled;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "USERS_AUTHORITIES", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
-	@OrderBy
+	@JoinTable(name = "USERS_AUTHORITIES", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID"))
 	@JsonIgnore
 	private Collection<Authority> authorities;
 
-	@JsonIgnore
-	@Column(name = "ACTIVATION_KEY", length = 20)
-	private String activationKey;
-	
 	@Override
 	public boolean isEnabled() {
 		return enabled;
