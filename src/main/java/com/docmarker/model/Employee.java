@@ -25,7 +25,9 @@ import lombok.Setter;
 @Setter
 public class Employee implements Serializable {
 
-    @Id
+   private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id = null;

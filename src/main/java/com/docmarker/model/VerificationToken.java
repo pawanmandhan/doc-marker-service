@@ -15,7 +15,9 @@ import javax.persistence.OneToOne;
 import com.docmarker.model.security.User;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 @Entity
 public class VerificationToken {
