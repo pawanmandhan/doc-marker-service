@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.docmarker.dto.PasswordDto;
 import com.docmarker.dto.UserDto;
-import com.docmarker.model.VerificationToken;
 import com.docmarker.model.security.User;
 import com.docmarker.service.UserRegistrationService;
 import com.docmarker.web.util.GenericResponse;
