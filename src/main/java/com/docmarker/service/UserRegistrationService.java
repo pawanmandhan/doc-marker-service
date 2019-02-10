@@ -28,4 +28,6 @@ public interface UserRegistrationService {
 
 	GenericResponse changeUserPassword(User user, PasswordDto passwordDto, String token);
 
+	GenericResponse resendRegistrationToken(String existingToken, HttpServletRequest request);
+
 }

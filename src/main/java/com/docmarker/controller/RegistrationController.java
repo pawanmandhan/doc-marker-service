@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.docmarker.dto.PasswordDto;
 import com.docmarker.dto.UserDto;
+import com.docmarker.model.VerificationToken;
 import com.docmarker.model.security.User;
 import com.docmarker.service.UserRegistrationService;
 import com.docmarker.web.util.GenericResponse;
@@ -53,8 +54,15 @@ public class RegistrationController {
 
 	//flow needs improvement
 	@PostMapping(value = "savePassword")
-	public GenericResponse savePassword(Locale locale, @Valid PasswordDto passwordDto, @RequestParam("token") String token) {
+	public GenericResponse savePassword(@Valid PasswordDto passwordDto, @RequestParam("token") String token, Locale locale) {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return userService.changeUserPassword(user, passwordDto, token);
 	}
+	@GetMapping(value = "resendRegistrationToken")
+	public GenericResponse resendRegistrationToken(@RequestParam("token") final String existingToken, final HttpServletRequest request) {
+		return userService.resendRegistrationToken(existingToken, request);
+	}
+
+	
+
 }

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +56,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	private ApplicationEventPublisher eventPublisher;
 	@Autowired
 	private UserSecurityService securityUserService;
+	@Autowired
+	private JavaMailSender mailSender;
+	    
 
 	@Transactional
 	@Override
@@ -181,8 +185,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		// }
 		String token = UUID.randomUUID().toString();
 		createPasswordResetTokenForUser(user, token);
-		// mailSender.send(constructResetTokenEmail(getAppUrl(request),
-		// request.getLocale(), token, user));
+		 mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
 		return new GenericResponse("message.resetPasswordEmail");
 	}
 	
@@ -200,6 +203,36 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		final String message = "";
 		// messages.getMessage("message.resetPassword", null, locale);
 		return constructEmail("Reset Password", message + " \r\n" + url, user);
+	}
+	
+	private SimpleMailMessage constructResendVerificationTokenEmail(final String contextPath, final Locale locale,
+			final VerificationToken newToken, final User user) {
+		final String confirmationUrl = contextPath + "/user/registrationConfirm?token=" + newToken.getToken();
+		final String message = "Resend Token Generated.";
+		return constructEmail("Resend Registration Token", message + " \r\n" + confirmationUrl, user);
+	}
+
+	@Override
+	public GenericResponse resendRegistrationToken(String existingToken, HttpServletRequest request) {
+		final VerificationToken newToken = generateNewVerificationToken(existingToken);
+		final User user = getUser(newToken.getToken());
+		mailSender.send(constructResendVerificationTokenEmail(getAppUrl(request), request.getLocale(), newToken, user));
+		return new GenericResponse("Resend Token Generated.");
+	}
+	
+	private VerificationToken generateNewVerificationToken(final String existingVerificationToken) {
+		VerificationToken vToken = tokenRepository.findByToken(existingVerificationToken);
+		vToken.updateToken(UUID.randomUUID().toString());
+		vToken = tokenRepository.save(vToken);
+		return vToken;
+	}
+
+	private User getUser(final String verificationToken) {
+		final VerificationToken token = tokenRepository.findByToken(verificationToken);
+		if (token != null) {
+			return token.getUser();
+		}
+		return null;
 	}
 
 }
