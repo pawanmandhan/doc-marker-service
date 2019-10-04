@@ -28,7 +28,9 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 public class Company implements Serializable {
 
-    @Id
+   private static final long serialVersionUID = 4198731783045089077L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", updatable = false, nullable = false)
     private Long id = null;
