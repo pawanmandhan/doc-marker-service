@@ -1,6 +1,5 @@
 package com.docmarker.service.util;
 
-import net.bytebuddy.utility.RandomString;
 
 public final class RandomUtil {
 
@@ -15,7 +14,7 @@ public final class RandomUtil {
      * @return the generated password
      */
     public static String generatePassword() {
-        return RandomString.make(DEF_COUNT);
+        return "";// RandomString.make(DEF_COUNT);
     }
 
     /**
@@ -24,7 +23,7 @@ public final class RandomUtil {
      * @return the generated activation key
      */
     public static String generateActivationKey() {
-        return  RandomString.make(DEF_COUNT);
+        return "";//RandomString.make(DEF_COUNT);
     }
 
     /**
@@ -33,6 +32,6 @@ public final class RandomUtil {
      * @return the generated reset key
      */
     public static String generateResetKey() {
-        return  RandomString.make(DEF_COUNT);
+        return "";//RandomString.make(DEF_COUNT);
     }
 }

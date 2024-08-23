@@ -3,7 +3,8 @@ package com.docmarker.service;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

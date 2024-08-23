@@ -20,7 +20,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Transactional(readOnly = true)
 	@PreAuthorize("hasAuthority('COMPANY_READ') and hasAuthority('DEPARTMENT_READ')")
 	public Company get(Long id) {
-		return companyRepository.findOne(id);
+		return companyRepository.getOne(id);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Transactional
 	@PreAuthorize("hasAuthority('COMPANY_DELETE')")
 	public void delete(Long id) {
-		companyRepository.delete(id);
+		companyRepository.deleteById(id);
 	}
 
 	@Override

@@ -1,21 +1,12 @@
 package com.docmarker.model;
 
-import java.util.Calendar;
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
 import com.docmarker.model.security.User;
-
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Calendar;
+import java.util.Date;
 
 @Setter
 @Getter

@@ -1,12 +1,10 @@
 package com.docmarker.dto;
 
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.docmarker.validation.PasswordMatches;
 import com.docmarker.validation.ValidEmail;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

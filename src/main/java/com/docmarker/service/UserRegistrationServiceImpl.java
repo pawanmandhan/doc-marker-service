@@ -6,9 +6,8 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
-
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

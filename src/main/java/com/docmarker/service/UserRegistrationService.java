@@ -1,6 +1,6 @@
 package com.docmarker.service;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.persistence.*;
 
 import com.docmarker.dto.PasswordDto;
 import com.docmarker.dto.UserDto;
@@ -8,6 +8,7 @@ import com.docmarker.exception.EmailAlreadyUsedException;
 import com.docmarker.model.VerificationToken;
 import com.docmarker.model.security.User;
 import com.docmarker.web.util.GenericResponse;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface UserRegistrationService {
 	GenericResponse registerUser(UserDto accountDto, final HttpServletRequest request) throws EmailAlreadyUsedException;
